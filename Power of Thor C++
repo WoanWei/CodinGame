@@ -1,0 +1,104 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ * ---
+ * Hint: You can use the debug stream to print initialTX and initialTY, if Thor seems not follow your orders.
+ **/
+int main()
+{
+    int LX; // the X position of the light of power
+    int LY; // the Y position of the light of power
+    int initialTX; // Thor's starting X position
+    int initialTY; // Thor's starting Y position
+    cin >> LX >> LY >> initialTX >> initialTY; cin.ignore();
+
+    int TX = initialTX;
+    int TY = initialTY;
+      
+    int OSX = abs(LX - TX); //Distance between Light and Thor
+    int OSY = abs(LY - TY);
+    
+    // game loop
+    while (1) {
+        int remainingTurns; // The remaining amount of turns Thor can move. Do not remove this line.
+        cin >> remainingTurns; cin.ignore();
+
+        // Write an action using cout. DON'T FORGET THE "<< endl"
+        // To debug: cerr << "Debug messages..." << endl;
+        
+        string directionX = "";
+        string directionY = "";
+    
+        if (OSX > OSY){
+            
+            if (TX > LX){
+                directionX += "W";
+                TX--;
+                OSX--;
+            } 
+            else if (TX < LX){
+                directionX += "E";
+                TX++;
+                OSX--;
+            } 
+        }
+        
+        else if (OSX < OSY){
+            
+            if (TY > LY){
+                directionY += "N";
+                TY--;
+                OSY--;
+            } 
+            else if (TY < LY){
+                directionY += "S";
+                TY++;
+                OSY--;
+            } 
+        }
+        
+        else if (OSX == OSY){
+            
+            if (TX > LX){
+                directionX += "W";
+                TX--;
+                OSX--;
+                OSY--;
+            } 
+            else if (TX < LX){
+                directionX += "E";
+                TX++;
+                OSX--;
+                OSY--;
+            } 
+    
+            if (TY > LY){
+                directionY += "N";
+                TY--;
+                OSX--;
+                OSY--;
+            } 
+            else if (TY < LY){
+                directionY += "S";
+                TY++;
+                OSX--;
+                OSY--;
+            } 
+        }
+        
+        else if (OSX == 0 && OSY == 0){
+            directionX = "";
+            directionY = "";
+        }
+
+        cout << directionY << directionX << endl; // A single line providing the move to be made: N NE E SE S SW W or NW
+        }
+    }
